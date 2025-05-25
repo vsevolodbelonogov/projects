@@ -35,14 +35,7 @@ class Node:
 
 
 def read_expression_from_file(filename: str) -> list[str]:
-    """Считывает выражение из файла и возвращает список токенов.
 
-    Args:
-        filename (str): Путь к файлу с выражением.
-
-    Returns:
-        list[str]: Токены выражения.
-    """
     if not os.path.isfile(filename):
         raise FileNotFoundError(f"Файл '{filename}' не найден.")
 
@@ -56,14 +49,7 @@ def read_expression_from_file(filename: str) -> list[str]:
 
 
 def build_expression_tree(tokens: list[str]) -> Node:
-    """Построение дерева из постфиксного выражения.
 
-    Args:
-        tokens (list[str]): Список токенов выражения.
-
-    Returns:
-        Node: Корень дерева выражения.
-    """
     stack: list[Node] = []
     operations = {"+": -1, "-": -2, "*": -3}
 
@@ -88,14 +74,7 @@ def build_expression_tree(tokens: list[str]) -> Node:
 
 
 def evaluate_node(node: Node) -> int:
-    """Вычисляет значение поддерева.
 
-    Args:
-        node (Node): Узел дерева.
-
-    Returns:
-        int: Результат вычисления.
-    """
     if node.left is None and node.right is None:
         return int(node.value)
 
@@ -113,14 +92,7 @@ def evaluate_node(node: Node) -> int:
 
 
 def simplify_subtractions(node: Optional[Node]) -> Optional[Node]:
-    """Упрощает дерево: заменяет вычитание на числовое значение.
 
-    Args:
-        node (Optional[Node]): Узел дерева.
-
-    Returns:
-        Optional[Node]: Упрощённое поддерево.
-    """
     if node is None:
         return None
 
@@ -134,12 +106,7 @@ def simplify_subtractions(node: Optional[Node]) -> Optional[Node]:
 
 
 def print_tree(node: Optional[Node], indent: str = "") -> None:
-    """Выводит дерево на экран в читаемом виде.
 
-    Args:
-        node (Optional[Node]): Узел дерева.
-        indent (str): Отступ.
-    """
     if node:
         print_tree(node.right, indent + "    ")
         print(f"{indent}{node.value}")
@@ -147,7 +114,7 @@ def print_tree(node: Optional[Node], indent: str = "") -> None:
 
 
 def main() -> None:
-    """Запуск программы."""
+  
     try:
         filename = "expression.txt"
         tokens = read_expression_from_file(filename)
